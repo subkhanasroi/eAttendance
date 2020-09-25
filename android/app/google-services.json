@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "737811727245",
+    "firebase_url": "https://eattendance-50a79.firebaseio.com",
+    "project_id": "eattendance-50a79",
+    "storage_bucket": "eattendance-50a79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737811727245:android:c8745c431984273a4933c4",
+        "android_client_info": {
+          "package_name": "com.example.eattendanceapps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "737811727245-sa138jsjo922g8rtvd03d82dea4q6ddb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9kPr0LT6bPSlSsJQoZjRmOQLYtQPlZ8Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "737811727245-sa138jsjo922g8rtvd03d82dea4q6ddb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
