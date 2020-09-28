@@ -20,10 +20,35 @@ class AddPageScreen extends StatelessWidget {
                     color: Colors.black,
                     fontWeight: FontWeight.bold),
               ),
+              TimeInHourAndMinute(),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class TimeInHourAndMinute extends StatefulWidget {
+  @override
+  _TimeInHourAndMinuteState createState() => _TimeInHourAndMinuteState();
+}
+
+class _TimeInHourAndMinuteState extends State<TimeInHourAndMinute> {
+  TimeOfDay _timeOfDay = TimeOfDay.now();
+  @override
+  Widget build(BuildContext context) {
+    String _period = _timeOfDay.period == DayPeriod.am ? "AM" : "PM";
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "${_timeOfDay.hour}:${_timeOfDay.minute}",
+          style: Theme.of(context).textTheme.headline1,
+        ),
+        SizedBox(width: 5),
+        Text(_period),
+      ],
     );
   }
 }

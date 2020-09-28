@@ -22,6 +22,27 @@ class _ListPageScreenState extends State<ListPageScreen> {
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
             ),
+            Container(
+              padding: EdgeInsets.fromLTRB(10, 30, 10, 10),
+              height: 100,
+              width: double.maxFinite,
+              child: Card(
+                elevation: 5,
+                child: Padding(
+                  padding: EdgeInsets.all(7),
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, top: 5),
+                        child: Column(
+                          children: [Text("Masuk")],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -109,7 +109,8 @@ class _SignFormState extends State<SignForm> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 color: kPrimaryColor,
-                onPressed: signInBase,
+                onPressed: () =>
+                    Navigator.pushNamed(context, LoginSuccessScreen.routeName),
                 child: Text(
                   "Continue",
                   style: TextStyle(
