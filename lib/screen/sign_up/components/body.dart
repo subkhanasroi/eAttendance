@@ -1,6 +1,6 @@
 import 'package:eattendanceapps/components/form_error.dart';
 import 'package:eattendanceapps/constants.dart';
-import 'package:eattendanceapps/screen/login_success/login_success_screen.dart';
+import 'package:eattendanceapps/screen/sign_in/sign_in_screen.dart';
 import 'package:eattendanceapps/size_config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +70,6 @@ class _SignUpFormState extends State<SignUpForm> {
         SizedBox(
           height: getProportionateScreenHeight(20),
         ),
-        buildConfirmPasswordFormField(),
         SizedBox(
           height: getProportionateScreenHeight(20),
         ),
@@ -82,9 +81,7 @@ class _SignUpFormState extends State<SignUpForm> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             color: kPrimaryColor,
-            onPressed: () {
-              if (_formKey.currentState.validate()) ;
-            },
+            onPressed: () => signUpBase(),
             child: Text(
               "Continue",
               style: TextStyle(
@@ -94,33 +91,6 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
         ),
       ]),
-    );
-  }
-
-  TextFormField buildConfirmPasswordFormField() {
-    return TextFormField(
-      obscureText: true,
-      onSaved: (newValue) => confirm_password = newValue,
-      onChanged: (value) {
-        if (password == confirm_password) {
-          removeError(error: kMatchPassError);
-        }
-        return null;
-      },
-      validator: (value) {
-        if (value.isEmpty) {
-          return "";
-        } else if (password != confirm_password) {
-          addError(error: kMatchPassError);
-          return "";
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        labelText: "Confirm Password",
-        hintText: "Re-Enter your Password",
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-      ),
     );
   }
 
@@ -161,7 +131,7 @@ class _SignUpFormState extends State<SignUpForm> {
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kUsernameNullError);
-        } else if (!usernameValidatorRegExp.hasMatch(value)) {
+        } else if (usernameValidatorRegExp.hasMatch(value)) {
           removeError(error: kInvalidUsernameError);
         }
         return null;
@@ -177,14 +147,14 @@ class _SignUpFormState extends State<SignUpForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Username",
-        hintText: "Enter your username",
+        labelText: "Email",
+        hintText: "Enter your Email",
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
     );
   }
 
-  Future<void> signInBase() async {
+  Future<void> signUpBase() async {
     final formState = _formKey.currentState;
     if (formState.validate()) {
       formState.save();
@@ -193,7 +163,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 .createUserWithEmailAndPassword(
                     email: username, password: password))
             .user;
-        Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+        Navigator.pushNamed(context, SignInScreen.routeName);
       } catch (e) {}
     }
   }

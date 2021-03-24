@@ -1,6 +1,7 @@
 import 'package:eattendanceapps/constants.dart';
 import 'package:eattendanceapps/screen/sign_in/sign_in_screen.dart';
 import 'package:eattendanceapps/size_config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilPageScreen extends StatefulWidget {
@@ -49,22 +50,8 @@ class _ProfilPageScreenState extends State<ProfilPageScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     color: kPrimaryColor,
-                    onPressed: () {},
-                    child: Text(
-                      "Edit Profile",
-                      style: TextStyle(
-                          fontSize: getProportionateScreenWidth(18),
-                          color: Colors.white),
-                    ),
-                  ),
-                  SizedBox(
-                    width: getProportionateScreenWidth(20),
-                  ),
-                  FlatButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    color: kPrimaryColor,
                     onPressed: () {
+                      _signOut();
                       Navigator.pushNamed(context, SignInScreen.routeName);
                     },
                     child: Text(
@@ -82,4 +69,8 @@ class _ProfilPageScreenState extends State<ProfilPageScreen> {
       ),
     );
   }
+}
+
+Future<void> _signOut() async {
+  await FirebaseAuth.instance.signOut();
 }

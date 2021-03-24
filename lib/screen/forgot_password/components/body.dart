@@ -45,7 +45,7 @@ class ForgotPassword extends StatefulWidget {
 class _ForgotPasswordState extends State<ForgotPassword> {
   final _formKey = GlobalKey<FormState>();
   List<String> errors = [];
-  String email;
+  String _email;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -54,7 +54,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           children: [
             TextFormField(
               keyboardType: TextInputType.emailAddress,
-              onSaved: (newValue) => email = newValue,
+              onSaved: (newValue) => _email = newValue,
               onChanged: (value) {
                 if (value.isNotEmpty && errors.contains(kUsernameNullError)) {
                   setState(() {
@@ -99,10 +99,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
                 color: kPrimaryColor,
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {}
-                  ;
-                },
+                onPressed: () {},
                 child: Text(
                   "Continue",
                   style: TextStyle(

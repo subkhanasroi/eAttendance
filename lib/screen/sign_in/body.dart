@@ -1,7 +1,7 @@
 import 'package:eattendanceapps/components/form_error.dart';
 import 'package:eattendanceapps/components/no_account_text.dart';
 import 'package:eattendanceapps/constants.dart';
-import 'package:eattendanceapps/screen/forgot_password/forgot_password_screen.dart';
+
 import 'package:eattendanceapps/screen/login_success/login_success_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
             ),
           ),
           Text(
-            "Sign in with your username and password",
+            "Sign in with your Email and password",
             textAlign: TextAlign.center,
           ),
           SizedBox(
@@ -65,62 +65,63 @@ class _SignFormState extends State<SignForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            buildUsernameTextFormField(),
-            SizedBox(height: getProportionateScreenHeight(20)),
-            buildPasswordTextFormField(),
-            SizedBox(height: getProportionateScreenHeight(20)),
-            Row(
-              children: [
-                Checkbox(
-                  value: remember,
-                  activeColor: kPrimaryColor,
-                  onChanged: (value) {
-                    setState(() {
-                      remember = value;
-                    });
-                  },
-                ),
-                Text("Remember Me"),
-                Spacer(),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(
-                        context, ForgotPasswordScreen.routeName);
-                  },
-                  child: Text(
-                    "Forgot Password",
-                    style: TextStyle(decoration: TextDecoration.underline),
+    return SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              buildUsernameTextFormField(),
+              SizedBox(height: getProportionateScreenHeight(20)),
+              buildPasswordTextFormField(),
+              SizedBox(height: getProportionateScreenHeight(20)),
+              Row(
+                children: [
+                  Checkbox(
+                    value: remember,
+                    activeColor: kPrimaryColor,
+                    onChanged: (value) {
+                      setState(() {
+                        remember = value;
+                      });
+                    },
                   ),
-                )
-              ],
-            ),
-            FormError(errors: errors),
-            SizedBox(height: getProportionateScreenHeight(20)),
-            SizedBox(
-              width: double.infinity,
-              height: getProportionateScreenHeight(56),
-              child: FlatButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                color: kPrimaryColor,
-                onPressed: () =>
-                    Navigator.pushNamed(context, LoginSuccessScreen.routeName),
-                child: Text(
-                  "Continue",
-                  style: TextStyle(
-                      fontSize: getProportionateScreenWidth(18),
-                      color: Colors.white),
+                  Text("Remember Me"),
+                  Spacer(),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.pushNamed(
+                  //         context, ForgotPasswordScreen.routeName);
+                  //   },
+                  //   child: Text(
+                  //     "Forgot Password",
+                  //     style: TextStyle(decoration: TextDecoration.underline),
+                  //   ),
+                  // )
+                ],
+              ),
+              FormError(errors: errors),
+              SizedBox(height: getProportionateScreenHeight(20)),
+              SizedBox(
+                width: double.infinity,
+                height: getProportionateScreenHeight(56),
+                child: FlatButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  color: kPrimaryColor,
+                  onPressed: () => signInBase(),
+                  child: Text(
+                    "Continue",
+                    style: TextStyle(
+                        fontSize: getProportionateScreenWidth(18),
+                        color: Colors.white),
+                  ),
                 ),
               ),
-            ),
-            NoAccountText(),
-          ],
+              NoAccountText(),
+            ],
+          ),
         ),
       ),
     );
@@ -163,7 +164,7 @@ class _SignFormState extends State<SignForm> {
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kUsernameNullError);
-        } else if (!usernameValidatorRegExp.hasMatch(value)) {
+        } else if (usernameValidatorRegExp.hasMatch(value)) {
           removeError(error: kInvalidUsernameError);
         }
         return null;
@@ -179,7 +180,7 @@ class _SignFormState extends State<SignForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Username",
+        labelText: "Email",
         hintText: "Enter your username",
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
